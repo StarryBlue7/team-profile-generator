@@ -1,6 +1,46 @@
 const fs = require('fs');
 
+function generatePage(team) {
+    let cards = '';
+    cards += team.manager ? generateCards(team, 'manager') : '';
+    cards += team.engineer ? generateCards(team, 'engineer') : '';
+    cards += team.intern ? generateCards(team, 'intern') : '';
 
+    const html = generateHTML(cards);
+
+    fs.writeFileSync('index.html', html);
+    return console.log('\nTeam page created!');
+}
+
+function generateCards(team, role) {
+    let roleCards = '';
+    
+    team[role].forEach(teammate => {
+        const title = role[0].toUpperCase() + role.substring(1);
+
+        let details = '';
+        const list = `                    <li class="list-group-item px-2">`;
+        details += teammate.id ? list + `Employee ID: ${teammate.id}</li> \n` : '';
+        details += teammate.email ? list + `Email: <a href="mailto: ${teammate.email}">${teammate.email}</a></li> \n` : '';
+        details += teammate.office ? list + `Office No.: ${teammate.office}</li> \n` : '';
+        details += teammate.gitHub ? list + `GitHub: <a target=_blank href="https://github.com/${teammate.gitHub}">${teammate.gitHub}</a></li> \n` : '';
+        details += teammate.school ? list + `School: ${teammate.school}</li> \n` : '';
+
+        const card = `
+            <article class="card col-3 m-2 bg-info text-light shadow">
+                <section class='card-body mb-1 pt-4 p-1 text-center'>
+                    <h3>${teammate.name}</h3>
+                    <h4>${title}</h4>
+                </section>
+                <ul class="list-group list-group-flush text-dark mb-3">
+${details}
+                </ul>
+            </article> \n`;
+
+        roleCards += card;
+    });
+    return roleCards;
+}
 
 function generateHTML(cards) {
     return `<!DOCTYPE html>
