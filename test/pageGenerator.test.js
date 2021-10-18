@@ -4,18 +4,6 @@ const pageGenerator = require('../pageGenerator')
 jest.mock('fs');
 
 describe('Page generator', () => {
-    // describe('generatePage function', () => {
-    //     it('should create an HTML file from the generated HTML string', () => {
-    //         const fileName = 'index.html';
-    //         const team = {engineer: [{name: 'Yshtola', id: 2, email: 'yshtola@scions.org', gitHub: 'Matoya'}]};
-
-    //         jest.mock('../pageGenerator');
-    //         pageGenerator.generateHTML.mockReturnValue("<html></html>")
-    //         const generatedHTML = pageGenerator.generatePage(team);
-
-    //         expect(fs.writeFileSync).toHaveBeenCalledWith(fileName, generatedHTML);
-    //     });
-    // });
 
     describe.each([
         { team: {manager: [{name: 'Exarch', id: 1, email: 'crystal@tower.gov', office: 12}]}, role: 'manager', info: 'office' },
