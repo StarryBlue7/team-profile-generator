@@ -1,46 +1,46 @@
 const inquirer = require('inquirer');
-const { Manager, Engineer, Intern } = require('./role');
+const { Manager, Engineer, Intern } = require('./Role');
 const pageGenerator = require('./pageGenerator');
 
-const questions = [
-    {
-        message: 'Enter name: ',
-        name: 'name'
-    },
-    {
-        message: 'Enter id: ',
-        name: 'id'
-    },
-    {
-        message: 'Enter email: ',
-        name: 'email'
-    },
-    {},
-    {
-        type: 'list',
-        loop: false,
-        message: 'Add another teammate?',
-        choices: ['engineer', 'intern', 'Finished adding'],
-        name: 'next'
+function queryTeammate(team, role) {
+    const questions = [
+        {
+            message: 'Enter name: ',
+            name: 'name'
+        },
+        {
+            message: 'Enter id: ',
+            name: 'id'
+        },
+        {
+            message: 'Enter email: ',
+            name: 'email'
+        },
+        {},
+        {
+            type: 'list',
+            loop: false,
+            message: 'Add another teammate?',
+            choices: ['engineer', 'intern', 'Finished adding'],
+            name: 'next'
+        }
+    ];
+    
+    const roleQuestions = {
+        manager: {
+            message: 'Enter office: ',
+            name: 'office'
+        },
+        engineer: {
+            message: 'Enter GitHub username: ',
+            name: 'gitHub'
+        },
+        intern: {
+            message: 'Enter school: ',
+            name: 'school',
+        }
     }
-];
 
-const roleQuestions = {
-    manager: {
-        message: 'Enter office: ',
-        name: 'office'
-    },
-    engineer: {
-        message: 'Enter GitHub username: ',
-        name: 'gitHub'
-    },
-    intern: {
-        message: 'Enter school: ',
-        name: 'school',
-    }
-}
-
-function queryTeammate(team, role, questions, roleQuestions) {
     questions[3] = roleQuestions[role];
     
     inquirer
@@ -57,7 +57,7 @@ function nextQuery(answers, team) {
         console.log(team);
         pageGenerator.generatePage(team);
     } else {
-        queryTeammate(team, answers.next, questions, roleQuestions);
+        queryTeammate(team, answers.next);
     }
 }
 
@@ -78,9 +78,9 @@ function addTeammate(team, role, answers) {
 }
 
 function init() {
-    queryTeammate({}, 'manager', questions, roleQuestions);
+    queryTeammate({}, 'manager');
 }
 
 init();
 
-module.exports = { queryTeammate, nextQuery, addTeammate, questions, roleQuestions };
+module.exports = { queryTeammate, nextQuery, addTeammate };

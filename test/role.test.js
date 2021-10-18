@@ -1,4 +1,4 @@
-const role = require('../role');
+const role = require('../Role');
 
 describe('Role', () => {
     describe('Manager', () => {

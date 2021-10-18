@@ -1,5 +1,5 @@
 const inquirer = require('inquirer');
-const { Manager, Engineer, Intern } = require('../role');
+const { Manager, Engineer, Intern } = require('../Role');
 const index = require('../index');
 const pageGenerator = require('../pageGenerator');
 

@@ -7,9 +7,10 @@ function generatePage(team) {
     cards += team.intern ? generateCards(team, 'intern') : '';
 
     const html = generateHTML(cards);
-
-    fs.writeFileSync('index.html', html);
-    return console.log('\nTeam page created!');
+ 
+    console.log('\nTeam page created!');
+    
+    return fs.writeFileSync('index.html', html);
 }
 
 function generateCards(team, role) {
