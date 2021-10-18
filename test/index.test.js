@@ -1,29 +1,30 @@
 const inquirer = require('inquirer');
 const { Manager, Engineer, Intern } = require('../role');
 const index = require('../index');
+const pageGenerator = require('../pageGenerator');
 
-jest.mock('inquirer');
+// jest.mock('inquirer');
 
 describe('Team builder', () => {
-    describe.each([
-        {role: 'manager'},
-        {role: 'engineer'},
-        {role: 'intern'}
-    ])('queryTeammate', () => {
-        it('should prompt with the 4th question specific to the role', (role) => {
-            const team = {};
-            const question1 = {question: 1};
-            const questions = [question1, question1, question1, question1, question1];
-            const roleQuestions = {manager: 'managerQ', engineer: 'engineerQ', intern: 'internQ'};
+    // describe.each([
+    //     {role: 'manager'},
+    //     {role: 'engineer'},
+    //     {role: 'intern'}
+    // ])('queryTeammate', ({role}) => {
+    //     it('should change prompt with the a question specific to the role', () => {
+    //         const team = {};
+    //         const question1 = {question: 1};
+    //         const questions = [question1, question1, question1, question1, question1];
+    //         const roleQuestions = {manager: 'managerQ', engineer: 'engineerQ', intern: 'internQ'};
 
-            inquirer.prompt.mockReturnValue(new Promise(function(resolve) {
-                resolve({ answer: 'set' });
-              }));
-            index.queryTeammate(team, role, questions, roleQuestions);
+    //         inquirer.prompt.mockReturnValue(new Promise(function(resolve) {
+    //             resolve({ answer: 'set' });
+    //         }));
+    //         index.queryTeammate(team, role, questions, roleQuestions);
 
-            expect(inquirer.prompt).lastCalledWith([question1, question1, question1, roleQuestions[role], question1])
-        });
-    });
+    //         expect(inquirer.prompt).lastCalledWith([question1, question1, question1, roleQuestions[role], question1], team)
+    //     });
+    // });
     
     describe.each([
         { role: 'manager', obj: {name: 'Exarch', id: 1, email: 'crystal@tower.gov', office: 12}, type: Manager },
@@ -55,5 +56,30 @@ describe('Team builder', () => {
             expect(teammate).toBeInstanceOf(type);
             expect(team[role]).toEqual([firstTeammate, obj]);
         });
+    });
+
+    describe.each([
+        {role: 'engineer'},
+        {role: 'intern'}
+    ])('nextQuery function', (role) => {
+        it('should generate the HTML page when Finished adding is chosen', () => {
+            const team = {team: 'set'};
+            const answers = {next: 'Finished adding'};
+            jest.spyOn(pageGenerator, 'generatePage');
+
+            index.nextQuery(answers, team);
+
+            expect(pageGenerator.generatePage).toHaveBeenCalledWith(team);
+        });
+
+        // it('should query for the selected role if not finished adding', () => {
+        //     const team = {team: 'set'};
+        //     const answers = {next: role};
+        //     jest.spyOn(index, 'queryTeammate');
+
+        //     index.nextQuery(answers, team);
+
+        //     expect(index.queryTeammate).toHaveBeenCalledWith(team, role, index.questions, index.roleQuestions);
+        // });
     });
 });
