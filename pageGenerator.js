@@ -1,7 +1,9 @@
 const fs = require('fs');
 
+// Generate HTML file page from generated cards and main template
 function generatePage(team) {
     let cards = '';
+    // Add cards for any included roles on team
     cards += team.manager ? generateCards(team, 'manager') : '';
     cards += team.engineer ? generateCards(team, 'engineer') : '';
     cards += team.intern ? generateCards(team, 'intern') : '';
@@ -13,6 +15,7 @@ function generatePage(team) {
     return fs.writeFileSync('index.html', html);
 }
 
+// Generate cards of employees from role array in team object
 function generateCards(team, role) {
     let roleCards = '';
     
@@ -41,6 +44,7 @@ ${details}
     return roleCards;
 }
 
+// Main page template
 function generateHTML(cards) {
     return `<!DOCTYPE html>
 <html lang="en">
@@ -57,7 +61,7 @@ function generateHTML(cards) {
     <header class="bg-info text-light text-center w-100 mb-5 py-2"><h1>Team Page</h1></header>
 
     <main class="row d-flex flex-row justify-content-center w-100">
-        <section class="d-flex flex-row justify-content-center col-10">
+        <section class="d-flex flex-row flex-wrap justify-content-center col-10">
             
 ${cards}
             

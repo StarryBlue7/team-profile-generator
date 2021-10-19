@@ -4,6 +4,7 @@ const Engineer = require('./Engineer');
 const Intern = require('./Intern');
 const pageGenerator = require('./pageGenerator');
 
+// Prompt for input of employee info
 function queryTeammate(team, role) {
     const questions = [
         {
@@ -54,14 +55,21 @@ function queryTeammate(team, role) {
         });
 }
 
+// Generate page if finished adding, or query next employee type chosen
 function nextQuery(answers, team) {
     if (answers.next === 'Finished adding') {
         pageGenerator.generatePage(team);
     } else {
+        if (answers.next === 'engineer') {
+            console.log('---------------------\nAdd engineer details:\n---------------------');
+        } else {
+            console.log('-------------------\nAdd intern details:\n-------------------')
+        }
         queryTeammate(team, answers.next);
     }
 }
 
+// Add teammate object to role array in team object
 function addTeammate(team, role, answers) {
     let teammate;
 
@@ -78,7 +86,9 @@ function addTeammate(team, role, answers) {
     return teammate;
 }
 
+// Run on start
 function init() {
+    console.log('--------------------\nAdd manager details:\n--------------------');
     queryTeammate({}, 'manager');
 }
 
