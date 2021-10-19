@@ -5,6 +5,7 @@ describe('Manager', () => {
         const manager = new Manager('Exarch', 1, 'crystal@tower.gov', 12);
 
         expect(manager).toEqual({name: 'Exarch', id: 1, email: 'crystal@tower.gov', office: 12, role: 'Manager'});
+        expect(manager).toBeInstanceOf(Manager);
     });
 
     describe('getOffice', () => {

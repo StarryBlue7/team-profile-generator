@@ -5,10 +5,11 @@ describe('Employee', () => {
         const employee = new Employee('Ardbert', 1, 'WoD@ffxiv.com');
 
         expect(employee).toEqual({name: 'Ardbert', id: 1, email: 'WoD@ffxiv.com', role: 'Employee'});
+        expect(employee).toBeInstanceOf(Employee);
     });
 
     describe('get methods', () => {
-        it('should return the name value', () => {
+        it('should return the property values', () => {
             const employee = new Employee('Ardbert', 1, 'WoD@ffxiv.com');
 
             const name = employee.getName();
