@@ -29,7 +29,7 @@ function generateCards(team, role) {
         details += teammate.school ? list + `School: ${teammate.school}</li> \n` : '';
 
         const card = `
-            <article class="card col-3 m-2 bg-info text-light shadow">
+            <article class="card col-sm-8 col-md-4 col-lg-3 m-2 bg-info text-light shadow">
                 <section class='card-body mb-1 pt-4 p-1 text-center'>
                     <h3>${teammate.name}</h3>
                     <h4>${teammate.role}</h4>
@@ -61,7 +61,7 @@ function generateHTML(cards) {
     <header class="bg-info text-light text-center w-100 mb-5 py-2"><h1>Team Page</h1></header>
 
     <main class="row d-flex flex-row justify-content-center w-100">
-        <section class="d-flex flex-row flex-wrap justify-content-center col-10">
+        <section class="d-flex flex-row flex-wrap justify-content-center col-sm-12 col-md-10 col-lg-8">
             
 ${cards}
             
