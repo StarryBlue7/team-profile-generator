@@ -1,5 +1,7 @@
 const inquirer = require('inquirer');
-const { Manager, Engineer, Intern } = require('./Role');
+const Manager = require('./Manager');
+const Engineer = require('./Engineer');
+const Intern = require('./Intern');
 const pageGenerator = require('./pageGenerator');
 
 function queryTeammate(team, role) {
@@ -54,7 +56,6 @@ function queryTeammate(team, role) {
 
 function nextQuery(answers, team) {
     if (answers.next === 'Finished adding') {
-        console.log(team);
         pageGenerator.generatePage(team);
     } else {
         queryTeammate(team, answers.next);

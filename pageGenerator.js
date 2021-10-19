@@ -17,8 +17,6 @@ function generateCards(team, role) {
     let roleCards = '';
     
     team[role].forEach(teammate => {
-        const title = role[0].toUpperCase() + role.substring(1);
-
         let details = '';
         const list = `                    <li class="list-group-item px-2">`;
         details += teammate.id ? list + `Employee ID: ${teammate.id}</li> \n` : '';
@@ -31,7 +29,7 @@ function generateCards(team, role) {
             <article class="card col-3 m-2 bg-info text-light shadow">
                 <section class='card-body mb-1 pt-4 p-1 text-center'>
                     <h3>${teammate.name}</h3>
-                    <h4>${title}</h4>
+                    <h4>${teammate.role}</h4>
                 </section>
                 <ul class="list-group list-group-flush text-dark mb-3">
 ${details}
