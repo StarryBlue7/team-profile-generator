@@ -10,7 +10,9 @@ Once the user is finished adding to the team, an `index.html` file is created, d
 
 ### Optional Sections
 
-Any queries left blank will be omitted from the generated employee cards.
+Any queries can be left blank to be omitted from the generated employee cards.
+
+![Omitted details](./images/omissions.png)
 
 ### Video Demo
 
