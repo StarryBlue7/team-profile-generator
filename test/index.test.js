@@ -5,8 +5,6 @@ const Intern = require('../Intern');
 const index = require('../index');
 const pageGenerator = require('../pageGenerator');
 
-// jest.mock('inquirer');
-
 describe('Team builder', () => {
 
     describe.each([
